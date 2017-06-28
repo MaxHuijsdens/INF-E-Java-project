@@ -1,0 +1,15 @@
+<div class="modal-header">
+    <h3 class="modal-title">Klant</h3>
+</div>
+<div class="modal-body">
+    <form role="form">
+        <div class="form-group">
+            <label for="customerName">Naam</label>
+            <input data-ng-model="customer.name" type="text" class="form-control" id="customerNameInput" placeholder="Klant naam">
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+   <button class="btn btn-success" ng-click="saveCustomer(customer)"><i class="fa fa-floppy-o"></i> Opslaan</button>
+   <button class="btn btn-danger"  ng-click="dismissModal()"><i class="fa fa-times"></i> Cancel</button>
+</div>

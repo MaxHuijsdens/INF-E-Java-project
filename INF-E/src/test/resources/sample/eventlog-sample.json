@@ -1,0 +1,17 @@
+{
+	"eventLog":
+	[
+		{
+			"timeStamp":"2013-12-29T17:15:11",
+			"status":"WARN",
+			"problems":["loss"],
+			"text":"Host changed status"
+		},
+		{
+			"timeStamp":"2013-12-29T17:43:58",
+			"status":"OK",
+			"problems":"",
+			"text":"Host changed status"
+		}
+	]
+}

@@ -1,0 +1,47 @@
+ <table id="server-table" class="table table-hover table-striped table-bordered table-condensed table-selectable data-table" >
+    <thead>
+        <tr>
+            <th sort-table-head by="order" reverse="reverse" order="'server.hostName'">Hostnaam</th>
+            <th sort-table-head by="order" reverse="reverse" order="'server.supportName'">42 naam</th>
+            <th sort-table-head by="order" reverse="reverse" order="'server.ipv4'">Ipv4</th>
+            <th sort-table-head by="order" reverse="reverse" order="'server.ipv6'">Ipv6</th>
+            <th sort-table-head by="order" reverse="reverse" order="'server.hostDns'">DNS</th>
+            <th sort-table-head by="order" reverse="reverse" order="'server.image'">Image</th>
+            <th sort-table-head by="order" reverse="reverse" order="'server.sla.number'">SLA nummer</th>
+            <th sort-table-head by="order" reverse="reverse" order="'server.sla.name'">Leverancier</th>
+            <th sort-table-head by="order" reverse="reverse" order="'server.server.cost'">&euro;/Maand</th>
+            <th sort-table-head by="order" reverse="reverse" order="'server.server.otap'">OTAPX</th>
+            <th sort-table-head by="order" reverse="reverse" order="'server.monitoredByServercheck'">SC</th>
+            <th sort-table-head by="order" reverse="reverse" order="'server.monitoredByNewrelic'">New Relic</th>
+            <th sort-table-head by="order" reverse="reverse" order="'server.inHybernation'">In hybernation</th>
+            <th sort-table-head by="order" reverse="reverse" order="'server.purpose'">Doel</th>
+            <th sort-table-head by="order" reverse="reverse" order="'server.remarks'">Opmerking</th>           
+            <th sort-table-head by="order" reverse="reverse" order="'lastChecked'">Inactief</th>           
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="row in dataList | orderBy:order:reverse | filter:searchText"  ng-dblclick="rowClickHandler(row.server.id)" repeat-done="fixedTableHeaders('server-table')">               
+            <td>    {{ row.server.hostName }}  </td>
+            <td>    {{ row.server.supportName }}   </td>
+            <td>    {{ row.server.ipv4 }}</td>
+            <td>   	{{ row.server.ipv6 }} </td>
+            <td>    {{ row.server.server.hostDns }} </td>
+            <td>    {{ row.server.image }} </td>
+            <td>    {{ row.server.sla.number }}  </td>
+            <td>    {{ row.server.supplier.name }}  </td>
+            <td>   	{{ row.server.cost }}   </td>
+			<td>   	{{ row.server.server.otap | uppercase }}   </td>
+            <td>    <replace-values possible-values="['true', 'false']" return-values="['<i class=\'fa fa-check\'></i>', '<i class=\'fa fa-times\'></i>']" value="{{ row.server.monitoredByServercheck }}">    </td>
+            <td>    <replace-values possible-values="['true', 'false']" return-values="['<i class=\'fa fa-check\'></i>', '<i class=\'fa fa-times\'></i>']" value="{{ row.server.monitoredByNewrelic }}">   </td>
+            <td>    <replace-values possible-values="['true', 'false']" return-values="['<i class=\'fa fa-check\'></i>', '<i class=\'fa fa-times\'></i>']" value="{{ row.server.inHybernation}}"> </td>
+            <td>    {{ row.server.purpose }}   </td>
+            <td>    {{ row.server.remarks }} </td>           
+            <td>    {{ row.lastChecked }} </td>           
+        </tr>
+        <tr data-ng-hide="dataList.length">
+            <td colspan="15">
+                <div class="alert alert-info centered">Geen resultaten gevonden.</div>
+            </td>
+        </tr>
+    </tbody>
+</table>

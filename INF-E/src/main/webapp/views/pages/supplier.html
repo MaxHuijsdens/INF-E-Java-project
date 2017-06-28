@@ -1,0 +1,62 @@
+<div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+	<h2>Leveranciers</h2>
+	<div id="supplier-content-panel" class="panel panel-default">
+	    <div class="panel-heading">
+		<div class="row">
+		    <div class="col-md-6">
+			<button type="submit" class="btn btn-success btn-sm pull-left"
+				ng-click="openModal()">
+			    <i class="fa fa-plus"></i> Nieuwe leverancier
+			</button>
+		    </div>
+		    <div class="col-md-6">
+                        <div class="form-group has-feedback pull-right" role="form">
+                            <label for="search-table-input"
+				   class="fa fa-search form-control-feedback"></label> <input
+				   type="text" class="form-control" id="search-table-input"
+				   placeholder="Zoeken..." ng-model="searchText" auto-focus="true">
+                        </div>
+                    </div>
+		</div>
+	    </div>
+	    <table
+		class="table table-striped table-bordered table-condensed table-selectable">
+		<thead>
+		    <tr>
+			<th sort-table-head by="order" reverse="reverse" order="'name'">Naam</th>
+			<th>Actie</th>
+		    </tr>
+		</thead>
+		<tbody>
+		    <tr ng-repeat="row in suppliers| orderBy:order:reverse | filter:searchText">
+			<td class="col-md-10">{{ row.name}}</td>
+			<td class="col-md-2">
+			    <label></label>
+			    <div class="btn-group pull-right">
+				<button type="button" class="btn btn-primary btn-sm"
+					ng-click="openModal(row)" data-tooltip="Aanpassen"
+					tooltip-append-to-body="true">
+				    <i class="fa fa-pencil-square-o"></i>
+				</button>
+				<button type="button" class="btn btn-danger btn-sm"
+					ng-click="deleteSupplier(row.id)" data-tooltip="Verwijderen"
+					tooltip-append-to-body="true">
+				    <i class="fa fa-trash-o"></i>
+				</button>
+			    </div>
+			</td>
+		    </tr>
+		    <tr data-ng-hide="suppliers.length">
+			<td colspan="2">
+			    <div class="alert alert-info centered">Geen leveranciers
+				gevonden</div>
+			</td>
+		    </tr>
+		</tbody>
+	    </table>
+	</div>
+    </div>
+    <div class="col-md-4"></div>
+</div>

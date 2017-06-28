@@ -1,0 +1,26 @@
+<div class="modal-header">
+    <h3 class="modal-title">SLA</h3>
+</div>
+<div class="modal-body">
+    <form role="form">
+        <div class="form-group">
+            <label for="slaNumber">Nummer</label>
+            <input data-ng-model="sla.number" type="text" class="form-control" id="slaNumberInput" placeholder="SLA nummer">
+        </div>
+        <div class="form-group">
+            <label for="slaName" class="control-label">Naam</label>
+            <input data-ng-model="sla.name" type="text" class="form-control" id="slaName" 
+                placeholder="SLA naam">
+        </div>
+
+        <div class="form-group">
+             <label for="disabledSelect" class="control-label">Klant</label>
+               <select id="disabledSelect" data-ng-model="sla.customer.id"  class="form-control"
+                   data-ng-options="customer.id as customer.name for customer in customers" disabled></select>      
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+   <button class="btn btn-success" ng-click="saveSla(sla)"><i class="fa fa-floppy-o"></i> Opslaan</button>
+   <button class="btn btn-danger"  ng-click="dismissModal()"><i class="fa fa-times"></i> Cancel</button>
+</div>

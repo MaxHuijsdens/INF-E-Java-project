@@ -1,0 +1,8 @@
+<div class="alert-fixed">
+	<alert ng-repeat="message in messageService.messages" class="with-icon" type="{{message.type}}" close="message.remove()">
+		{{message.title}}
+		<ol>
+			<li data-ng-repeat="txt in message.subMessages">{{txt}}</li>
+		</ol>
+	</alert>
+</div>

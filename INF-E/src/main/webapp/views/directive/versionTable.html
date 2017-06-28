@@ -1,0 +1,72 @@
+
+<table id="version-table"
+	class="table table-hover table-striped table-bordered table-condensed table-selectable data-table">
+	<thead>
+		<tr>
+			<th sort-table-head by="order" reverse="reverse" order="'hostName'">HostName</th>
+			<th sort-table-head by="order" reverse="reverse"
+				order="'supportName'">42 Naam</th>
+			<th sort-table-head by="order" reverse="reverse"
+				order="'versions.ubuntu'">Ubuntu</th>
+			<th sort-table-head by="order" reverse="reverse"
+				order="'versions.puppet'">Puppet</th>
+			<th sort-table-head by="order" reverse="reverse"
+				order="'versions.java'">Java</th>
+			<th sort-table-head by="order" reverse="reverse"
+				order="'versions.postgres'">Postgres</th>
+			<th sort-table-head by="order" reverse="reverse"
+				order="'versions.mysql'">Mysql</th>
+			<th sort-table-head by="order" reverse="reverse"
+				order="'versions.mongodb'">MongoDb</th>
+			<th sort-table-head by="order" reverse="reverse"
+				order="'versions.apache2'">Apache</th>
+			<th sort-table-head by="order" reverse="reverse"
+				order="'versions.tomcat'">Tomcat</th>
+			<th sort-table-head by="order" reverse="reverse"
+				order="'versions.crowd'">Crowd</th>
+			<th sort-table-head by="order" reverse="reverse"
+				order="'versions.jira'">Jira</th>
+			<th sort-table-head by="order" reverse="reverse"
+				order="'versions.stash'">Stash</th>
+			<th sort-table-head by="order" reverse="reverse"
+				order="'versions.bamboo'">Bamboo</th>
+			<th sort-table-head by="order" reverse="reverse"
+				order="'versions.certValidPeriod'">Cer. Valid Period</th>
+			<th sort-table-head by="order" reverse="reverse"
+				order="'versions.servercheck'">Server Check</th>
+			<th sort-table-head by="order" reverse="reverse"
+				order="'versions.fisheye'">Fisheye</th>
+			<th sort-table-head by="order" reverse="reverse"
+				order="'versions.confluence'">Confluence</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr
+			ng-repeat="row in dataList | orderBy:order:reverse | filter:searchText"
+			ng-dblclick="rowClickHandler(row.serverId)" repeat-done="fixedTableHeaders('version-table')">
+			<td>{{ row.hostName }}</td>
+			<td>{{ row.supportName }}</td>
+			<td>{{ row.versions.ubuntu }}</td>
+			<td>{{ row.versions.puppet }}</td>
+			<td>{{ row.versions.java }}</td>
+			<td>{{ row.versions.postgres }}</td>
+			<td>{{ row.versions.mysql }}</td>
+			<td>{{ row.versions.mongodb }}</td>
+			<td>{{ row.versions.apache2 }}</td>
+			<td>{{ row.versions.tomcat }}</td>
+			<td>{{ row.versions.crowd }}</td>
+			<td>{{ row.versions.jira }}</td>
+			<td>{{ row.versions.stash }}</td>
+			<td>{{ row.versions.bamboo }}</td>
+			<td>{{ row.versions.certValidPeriod }}</td>
+			<td>{{ row.versions.servercheck }}</td>
+			<td>{{ row.versions.fisheye }}</td>
+			<td>{{ row.versions.confluence }}</td>
+		</tr>
+		<tr data-ng-hide="dataList.length">
+			<td colspan="18">
+				<div class="alert alert-info centered">Geen resultaten gevonden.</div>
+			</td>
+		</tr>
+	</tbody>
+</table>

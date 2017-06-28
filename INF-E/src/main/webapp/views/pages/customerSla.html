@@ -1,0 +1,131 @@
+<div class="row">
+    <div class="col-md-4">
+        <h2>Klanten</h2>
+        <div id="customer-content-panel" class="panel panel-default">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-md-6">
+                        <button type="submit" class="btn btn-success btn-sm pull-left"
+                            ng-click="openModal('customer', null, null)">
+                            <i class="fa fa-plus"></i> Nieuwe Klant
+                        </button>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group has-feedback pull-right" role="form">
+                            <label for="search-table-input"
+                                class="fa fa-search form-control-feedback"></label> <input
+                                type="text" class="form-control" id="search-table-input"
+                                placeholder="Zoeken..." ng-model="searchTextCustomer" auto-focus="true">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <table
+                class="table table-striped table-bordered table-condensed table-selectable table-hover">
+                <thead>
+                    <tr>
+                        <th sort-table-head by="orderCustomer" reverse="reverseCustomer" order="'name'">Naam</th>
+                        <th>Actie</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="row in customers | orderBy:orderCustomer:reverseCustomer | filter:searchTextCustomer" ng-click="getSlaList(row)">
+                        <td>{{ row.name }}</td>
+                        <td>
+                            <label></label>
+                            <div class="btn-group pull-right">
+                                <button type="button" class="btn btn-success btn-sm"
+                                    ng-click="openModal('sla', null, row)">
+                                    <i class="fa fa-plus"> Nieuwe SLA</i>
+                                </button>
+                                <button type="button" class="btn btn-primary btn-sm"
+                                    ng-click="openModal('customer', row, null)" data-tooltip="Aanpassen"
+                                    tooltip-append-to-body="true">
+                                    <i class="fa fa-pencil-square-o"></i>
+                                </button>
+                                <button type="button" class="btn btn-danger btn-sm"
+                                    ng-click="deleteCustomer(row.id)" data-tooltip="Verwijderen"
+                                    tooltip-append-to-body="true">
+                                    <i class="fa fa-trash-o"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr data-ng-hide="customers.length">
+                        <td colspan="2">
+                            <div class="alert alert-info centered">Geen klanten
+                                gevonden</div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="panel-footer"></div>
+        </div>
+    </div>
+    <div class="col-md-8">
+        <h2 ng-if="slaByCustomer">SLA&#39;s van {{ customerName }}</h2>
+        <h2 ng-if="!slaByCustomer">SLA&#39;s</h2>
+        <div id="sla-content-panel" class="panel panel-default">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-md-5">
+                        <div ng-if="slaByCustomer">
+                            <button type="submit" class="btn btn-default btn-sm "
+                                ng-click="getSlaList()">
+                                <i class="fa fa-list"></i> Alle SLA's
+                            </button>
+                        </div>
+                    </div>                 
+                    <div class="col-md-7">
+                        <div class="form-group has-feedback pull-right" role="form">
+                            <label for="search-table-input"
+                                class="fa fa-search form-control-feedback"></label> <input
+                                type="text" class="form-control" id="search-table-input"
+                                placeholder="Zoeken..." ng-model="searchTextSla">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <table
+                class="table table-striped table-bordered table-condensed table-selectable">
+                <thead>
+                    <tr>
+                        <th sort-table-head by="orderSla" reverse="reverseSla" order="'number'">Nummer</th>
+                        <th sort-table-head by="orderSla" reverse="reverseSla" order="'name'">Naam</th>
+                        <th sort-table-head by="orderSla" reverse="reverseSla" order="'customer.name'">Klant</th>
+                        <th>Actie</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="row in slas | orderBy:orderSla:reverseSla |  filter:searchTextSla">
+                        <td>{{ row.number }}</td>
+                        <td>{{ row.name }}</td>
+                        <td>{{ row.customer.name }}</td>
+                        <td>
+                            <label></label>
+                            <div class="btn-group pull-right">
+                                <button type="button" class="btn btn-primary btn-sm"
+                                    ng-click="openModal('sla', row, null)" data-tooltip="Aanpassen"
+                                    tooltip-append-to-body="true">
+                                    <i class="fa fa-pencil-square-o"></i>
+                                </button>
+                                <button type="button" class="btn btn-danger btn-sm"
+                                    ng-click="deleteSla(row.id)" data-tooltip="Verwijderen"
+                                    tooltip-append-to-body="true">
+                                    <i class="fa fa-trash-o"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr data-ng-hide="slas.length">
+                        <td colspan="4">
+                            <div class="alert alert-info centered">Geen SLA's
+                                gevonden</div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="panel-footer"></div>
+        </div>
+    </div>
+</div>

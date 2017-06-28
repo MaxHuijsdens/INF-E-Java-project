@@ -1,0 +1,20 @@
+<div class="modal-header">
+    <h3 class="modal-title">Notities</h3>
+</div>
+<div class="modal-body">
+	<div class="row">
+	   <div class="col-md-12">
+	       <date-time-picker text="Notitie datum:" data-ng-model="noteDate"></date-time-picker>
+	   </div>
+    </div>
+    <br>
+    <div class="row">
+         <div class="col-md-12">
+    	   <textarea class="form-control" rows="3" ng-model="note.noteText" placeholder="Notitie"></textarea>
+    	 </div>
+    </div>
+</div>
+<div class="modal-footer">
+   <button class="btn btn-success" data-ng-click="saveNote(note, noteDate)"><i class="fa fa-floppy-o"></i> Opslaan</button>
+   <button class="btn btn-danger"  data-ng-click="dismissModal()"><i class="fa fa-times"></i> Cancel</button>
+</div>

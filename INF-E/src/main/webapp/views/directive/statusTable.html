@@ -1,0 +1,56 @@
+ <table id="status-table" class="table table-hover table-striped table-bordered table-condensed table-selectable data-table">
+    <thead>
+        <tr >
+            <th sort-table-head by="order" reverse="reverse" order="'server.hostName'">HostName</th>
+            <th sort-table-head by="order" reverse="reverse" order="'server.supportName'">42 Name</th>
+            <th sort-table-head by="order" reverse="reverse" order="'status'">Status</th>
+            <th sort-table-head by="order" reverse="reverse" order="'source'">Source</th>
+            <th sort-table-head by="order" reverse="reverse" order="'timeOfMeasurement'">Tijd Meting</th>
+            <th sort-table-head by="order" reverse="reverse" order="'upTime'">Uptime</th>
+            <th sort-table-head by="order" reverse="reverse" order="'load'">Load</th>
+            <th sort-table-head by="order" reverse="reverse" order="'cpuUsage'">CPU</th>
+            <th sort-table-head by="order" reverse="reverse" order="'diskUsage'">Disk</th>
+            <th sort-table-head by="order" reverse="reverse" order="'networkIn'">Network In</th>
+            <th sort-table-head by="order" reverse="reverse" order="'networkOut'">Network Out</th>
+            <th sort-table-head by="order" reverse="reverse" order="'diskIo'">Disk IO</th>
+            <th sort-table-head by="order" reverse="reverse" order="'roundtripTime'">Roundtrip Time</th>
+            <th sort-table-head by="order" reverse="reverse" order="'ioWait'">IO Wait</th>
+            <th sort-table-head by="order" reverse="reverse" order="'freeRam'">Free Ram</th>
+            <th sort-table-head by="order" reverse="reverse" order="'freeSwap'">Free Swap</th>
+            <th sort-table-head by="order" reverse="reverse" order="'processesRunning'">Processes</th>
+            <th sort-table-head by="order" reverse="reverse" order="'inodeUsage'">Inode</th>
+            <th sort-table-head by="order" reverse="reverse" order="'totalMemory'">Memory</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="row in dataList | orderBy:order:reverse | filter:searchText" ng-dblclick="rowClickHandler(row.server.id)"
+            determine-row-color status="{{ row.status }}" ng-class="rowColor" repeat-done="fixedTableHeaders('status-table')">               
+            <td>{{ row.server.hostName }}</td>
+            <td>{{ row.server.supportName }}</td>
+            <td>{{ row.status }}</td>
+            <td>{{ row.dataSource }}</td>
+            <td>{{ row.timeOfMeasurement | date:'HH:mm dd-MM-yyyy'}}</td>
+            <td>{{ row.uptime }}</td>
+            <td>{{ row.load }}</td>
+            <td data-ng-if="row.dataSource == 'servcheck'">{{ row.cpuUsage }}</td>
+            <td data-ng-if="row.dataSource == 'servcheck'">{{ row.diskUsage }}</td>
+            <td data-ng-if="row.dataSource == 'n2'">{{ row.cpuUsagePercent }}</td>
+            <td data-ng-if="row.dataSource == 'n2'">{{ row.diskUsagePercent }}</td>          
+            <td>{{ row.networkIn }}</td>
+            <td>{{ row.networkOut }}</td>
+            <td>{{ row.diskIo }}</td>
+            <td>{{ row.roundtripTime }}</td>
+            <td>{{ row.ioWait }}</td>
+            <td>{{ row.freeRam }}</td>
+            <td>{{ row.freeSwap }}</td>
+            <td>{{ row.processesRunning }}</td>
+            <td>{{ row.inodeUsage }}</td>
+            <td>{{ row.totalMemory }}</td>
+        </tr>
+        <tr data-ng-hide="dataList.length">
+            <td colspan="19">
+                <div class="alert alert-info centered">Geen resultaten gevonden.</div>
+            </td>
+        </tr>
+    </tbody>
+</table>

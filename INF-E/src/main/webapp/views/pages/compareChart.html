@@ -1,0 +1,76 @@
+<div class="row">
+    <div class="col-md-12">
+	<h2 class="pull-left">Vergelijk data</h2>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+	<div class="panel panel-default">
+	    <!-- Default panel contents -->
+	    <div class="panel-heading">
+		<div class="row">
+		    <div class="col-md-2">
+			<ng-switch-toggle-group group-name="measurements" theme="custom"
+						data-ng-model="measurementSource" choices="measurements"></ng-switch-toggle-group>
+		    </div>
+		    <div class="col-md-6">
+			<div class="form-inline has-feedback" role="form">
+			    <div class="form-group">
+				<input id="selectServer" type="text" placeholder="Server"
+				       data-ng-model="selectedServer"
+				       typeahead="server as server.hostName for server in getServers($viewValue) | filter:$viewValue | limitTo:5"
+				       class="form-control" auto-focus="true">
+			    </div>
+			    <div class="form-group">
+				<select id="selectMetric" data-ng-model="selectedMetric"
+					class="form-control"
+					data-ng-options="metric.name for metric in metrics"></select>
+				<button id="addButton" class="btn btn-info"
+					data-ng-click="addDataToChart()">Voeg toe</button>
+			    </div>
+			</div>
+		    </div>
+		    <div class="col-md-2">
+			<div class="pull-left">
+			    <date-time-picker text="Van:" data-ng-model="dateFrom" on-time-set-method="onTimeSet()"></date-time-picker>
+			</div>
+		    </div>
+		    <div class="col-md-2">
+			<div class="pull-left">
+			    <date-time-picker text="Tot:" data-ng-model="dateUntil" on-time-set-method="onTimeSet()"></date-time-picker>
+			</div>
+		    </div>
+		</div>
+	    </div>
+	    <div class="panel-body">
+		<!-- Chart -->
+		<div class="row">
+		    <div class="col-md-12">
+			<div class="panel panel-default">
+			    <div class="panel-body">
+				<editable-chart></editable-chart>
+			    </div>
+			</div>
+		    </div>
+		</div>
+
+		<!-- Loaded data/parameters/filters -->
+		<div class="row">
+		    <div class="col-md-12">
+			<div class="panel panel-default">
+			    <div class="panel-body">
+				<div class="filter-container">
+				    <div class="filter" ng-repeat="filter in chartData">
+					{{ filter.filterName}} <i class="fa fa-times-circle"
+								   ng-click="removeFilter(filter)"></i> &nbsp; | &nbsp;
+				    </div>
+				</div>
+			    </div>
+			</div>
+		    </div>
+		</div>
+
+	    </div>
+	</div>
+    </div>
+</div>

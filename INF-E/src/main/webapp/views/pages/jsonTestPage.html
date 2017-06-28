@@ -1,0 +1,29 @@
+<div class="row">
+	<div class="col-md-3">
+		<div class="panel panel-primary">
+			<button type="button" class="btn btn-default "
+				data-ng-click="sendPersistentData()">Send Persistent data</button>
+			<div ng-model="persistentDataResponse">{{
+				persistentDataResponse }}</div>
+		</div>
+	</div>
+	<div class="col-md-3">
+		<div class="panel panel-primary">
+			<button type="button" class="btn btn-default "
+				data-ng-click="sendServerMeasurement()">Send Server
+				measurement</button>
+			<div ng-model="serverDataResponse">{{ serverDataResponse }}</div>
+		</div>
+	</div>
+</div>
+
+
+{{ dateUntil }}
+
+<date-time-picker data-ng-model="dateUntil" text="Van:"></date-time-picker>
+
+<input type="checkbox" ng-switch-toggle-simple ng-model="simplechoice" text-on="Oui" text-off="Non" theme="candy"/>
+
+<ng-switch-toggle-group class="pull-left" group-name="views" theme="custom" ng-model="infoView" choices="views"></ng-switch-toggle-group>
+
+<ng-switch-toggle-group class="pull-left" group-name="measurements" theme="custom" data-ng-model="measurementSource" choices="measurements"></ng-switch-toggle-group>

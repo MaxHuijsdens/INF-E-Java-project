@@ -1,0 +1,104 @@
+<html>
+<head>
+
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta http-equiv="content-style-type" content="text/css">
+<meta http-equiv="content-script-type" content="text/javascript">
+<meta http-equiv="content-language" content="en">
+
+<!--Stylesheets-->
+<link type="text/css" rel="stylesheet/less" href="styles/main.less" />
+<link type="text/css" rel="stylesheet/less" href="styles/datetimepicker.less" />
+<link type="text/css" rel="stylesheet/less" href="styles/ng-switch-toggle.less" />
+
+<!-- Bootstrap -->
+<link type="text/css" rel="stylesheet/less" href="styles/bootstrap/bootstrap.less" />
+
+<!-- Font awesome -->
+<link rel="stylesheet/less" href="styles/font-awesome/font-awesome.less">
+
+<!--JQuery scripts-->
+<script type="text/javascript" src="vendors/jquery-1.11.1.min.js"></script>
+
+<!-- Less -->
+<script type="text/javascript" src="vendors/less-1.7.0.min.js"></script>
+
+<!--AngularJS scripts-->
+<script type="text/javascript" src="vendors/angular.min.js"></script>
+<script type="text/javascript" src="vendors/angular-route.min.js"></script>
+<script type="text/javascript" src="vendors/angular-cookies.min.js"></script>
+<script type="text/javascript" src="vendors/ui-bootstrap-tpls-0.11.0.min.js"></script>
+<script type="text/javascript" src="vendors/angular-timer.min.js"></script>
+
+<!--Highcharts scripts-->
+<script type="text/javascript" src="vendors/highcharts/highstock.js"></script>
+<script type="text/javascript" src="vendors/highcharts/exporting.js"></script>
+
+<!-- Moment (Date/Time/DateTimes) -->
+<script type="text/javascript" src="vendors/moment.min.js"></script>
+
+<!-- Ohther -->
+<script type="text/javascript" src="vendors/jquery.floatThead.min.js"></script>
+<script type="text/javascript" src="vendors/datetimepicker.js"></script>
+<script type="text/javascript" src="vendors/ng-switch-toggle.js"></script>
+
+<!--Classes scripts-->
+<script type="text/javascript" src="scripts/koekoek.js"></script>
+
+<!-- Angular Controllers -->
+<script type="text/javascript" src="scripts/controllers/serversOverviewController.js"></script>
+<script type="text/javascript" src="scripts/controllers/chartPageController.js"></script>
+<script type="text/javascript" src="scripts/controllers/serverInfoController.js"></script>
+<script type="text/javascript" src="scripts/controllers/supplierController.js"></script>
+<script type="text/javascript" src="scripts/controllers/customerSlaController.js"></script>
+<script type="text/javascript" src="scripts/controllers/slaController.js"></script>
+<script type="text/javascript" src="scripts/controllers/customerController.js"></script>
+<script type="text/javascript" src="scripts/controllers/activityStreamController.js"></script>
+<script type="text/javascript" src="scripts/controllers/loginController.js"></script>
+<script type="text/javascript" src="scripts/controllers/headerController.js"></script>
+<script type="text/javascript" src="scripts/controllers/footerController.js"></script>
+<script type="text/javascript" src="scripts/controllers/manageController.js"></script>
+<script type="text/javascript" src="scripts/controllers/jsonTestController.js"></script>
+
+<!-- Angular Directives -->
+<script type="text/javascript" src="scripts/directives/autoFocus.js"></script>
+<script type="text/javascript" src="scripts/directives/sortTableHead.js"></script>
+<script type="text/javascript" src="scripts/directives/highStockChart.js"></script>
+<script type="text/javascript" src="scripts/directives/editableChart.js"></script>
+<script type="text/javascript" src="scripts/directives/determineRowColor.js"></script>
+<script type="text/javascript" src="scripts/directives/switchCheckbox.js"></script>
+<script type="text/javascript" src="scripts/directives/repeatDone.js"></script>
+<script type="text/javascript" src="scripts/directives/replaceValues.js"></script>
+<script type="text/javascript" src="scripts/directives/dateTimePicker.js"></script>
+<script type="text/javascript" src="scripts/directives/loader.js"></script>
+
+<!-- Angular Services -->
+<script type="text/javascript" src="scripts/services/serverService.js"></script>
+<script type="text/javascript" src="scripts/services/measurementService.js"></script>
+<script type="text/javascript" src="scripts/services/customerSupplierService.js"></script>
+<script type="text/javascript" src="scripts/services/loginService.js"></script>
+<script type="text/javascript" src="scripts/services/messageService.js"></script>
+<script type="text/javascript" src="scripts/services/modalService.js"></script>
+<script type="text/javascript" src="scripts/services/userIptableService.js"></script>
+
+<!--Page title-->
+<title>Koekoek</title>
+
+<!--Favicon-->
+<link rel="shortcut icon" type="image/png" href="favicon.ico">
+</head>
+
+<body data-ng-app="koekoek">
+    <header data-ng-controller="HeaderController" data-ng-include="'views/partials/header.html'"></header>
+	<div id="content_container" class="container-fluid" data-ng-view></div>
+	<div data-ng-include="'views/partials/messages.html'"></div>
+	<footer data-ng-controller="FooterController">
+	    <ul id="version-info">
+		<li>Application: {{version.versionInfo.applicationVersion}}</li>
+		<li>|</li>
+		<li>Database: v{{version.versionInfo.databaseVersion.tag}}</li>
+	    </ul>
+	</footer>
+</body>
+
+</html>

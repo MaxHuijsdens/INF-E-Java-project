@@ -1,0 +1,599 @@
+<div class="row">
+    <div class="col-md-12">
+	<h2 class="pull-left">{{ server.hostName}}, {{
+		    server.supportName}}</h2>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+	<div id="server-info-content-panel" class="panel panel-default">
+	    <div class="panel-heading">
+		<div class="row">
+		    <div class="col-md-2">
+			<ng-switch-toggle-group group-name="views" theme="custom"
+			    data-ng-model="currentView" choices="views"
+			    data-ng-click="toggleSwitch()">
+			</ng-switch-toggle-group>
+		    </div>
+		    <div ng-show="currentView == 'metrics'">
+			<div class="col-md-3"></div>
+			<div class="col-md-2">
+			    <ng-switch-toggle-group group-name="measurements" theme="custom"
+						    data-ng-model="measurementSource" choices="measurements"></ng-switch-toggle-group>
+			</div>
+			<div class="col-md-2">
+			    <date-time-picker text="Van:" data-ng-model="dateFrom"></date-time-picker>
+			</div>
+			<div class="col-md-2">
+			    <date-time-picker text="Tot:" data-ng-model="dateUntil"></date-time-picker>
+			</div>
+			<div class="col-md-1">
+			    <button id="addButton" class="btn btn-info pull-right" data-ng-click="getChartData()">Submit</button>
+			</div>
+		    </div>
+		</div>
+	    </div>
+	    <!-- All static info -->
+	    <div class="panel-body">
+		<div class="row">
+		    <div data-ng-show="currentView == 'info'">
+			<div class="col-md-4">
+			    <form name="serverForm">
+				<table class="table table-striped table-bordered table-condensed table-selectable">
+				    <tbody>
+					<tr>
+					    <td>
+						<div class="row">
+						    <div class="form-group">
+							<label for="hostName" class="col-md-4 control-label">Hostnaam:</label>
+							<div class="col-md-8">
+							    <input data-ng-model="server.hostName" type="text"
+								class="form-control" id="hostName"
+								placeholder="Hostnaam" auto-focus="true" />
+							</div>
+						    </div>
+						</div>
+					    </td>
+					</tr>
+					<tr>
+					    <td>
+						<div class="row">
+						    <div class="form-group">
+							<label for="supportName" class="col-md-4 control-label">42
+							    naam:
+							</label>
+							<div class="col-md-8">
+							    <input data-ng-model="server.supportName" type="text"
+								class="form-control" id="supportNameInput"
+								placeholder="42 naam" />
+							</div>
+						    </div>
+						</div>
+					    </td>
+					</tr>
+					<tr>
+					    <td>
+						<div class="row">
+						    <div class="form-group">
+							<label for="hostDns" class="col-md-4 control-label">DNS:</label>
+							<div class="col-md-8">
+							    <input data-ng-model="server.hostDns" type="text"
+								class="form-control" id="hostDns" placeholder="Host DNS" />
+							</div>
+						    </div>
+						</div>
+					    </td>
+					</tr>
+					<tr>
+					    <td>
+						<div class="row">
+						    <div class="form-group">
+							<label for="ipv4" class="col-md-4 control-label">Ipv4:</label>
+							<div class="col-md-8">
+							    <input data-ng-model="server.ipv4" type="text"
+								class="form-control" id="ipv4" placeholder="Ipv4" />
+							</div>
+						    </div>
+						</div>
+					    </td>
+					</tr>
+					<tr>
+					    <td>
+						<div class="row">
+						    <div class="form-group">
+							<label for="ipv6" class="col-md-4 control-label">Ipv6:</label>
+							<div class="col-md-8">
+							    <input data-ng-model="server.ipv6" type="text"
+								class="form-control" id="ipv6" placeholder="Ipv6" />
+							</div>
+						    </div>
+						</div>
+					    </td>
+					</tr>
+					<tr>
+					    <td>
+						<div class="row">
+						    <div class="form-group">
+							<label for="imageForm" class="col-md-4 control-label">Image:</label>
+							<div class="col-md-8">
+							    <input data-ng-model="server.image" type="text"
+								class="form-control" id="imageInput" placeholder="Image" />
+							</div>
+						    </div>
+						</div>
+					    </td>
+					</tr>
+					<tr>
+					    <td>
+						<div class="row">
+						    <div class="form-group">
+							<label for="costForm" class="col-md-4 control-label">&euro;/Maand:</label>
+							<div class="col-md-8">
+							    <input name="serverCost" data-ng-model="server.cost"
+								type="number" class="form-control" id="costInput"
+								placeholder="Kosten per maand">
+							</div>
+						    </div>
+						</div>
+						<div data-ng-show="serverForm.serverCost.$invalid">
+						    <br>
+						    <div class="row">
+							<div class="col-md-12">
+							    <div class="alert alert-warning centered">&euro;/Maand
+								moet een getal zijn.
+							    </div>
+							</div>
+						    </div>
+						</div>
+					    </td>
+					</tr>
+					<tr>
+					    <td>
+						<div class="row">
+						    <div class="form-group">
+							<label for="otapSelect" class="col-md-4 control-label">OTAPX:</label>
+							<div class="col-md-8">
+							    <select id="otapSelect" data-ng-model="server.otap"
+								    class="form-control">
+								<option value="">-- OTAP --</option>
+								<option value="o">O</option>
+								<option value="t">T</option>
+								<option value="a">A</option>
+								<option value="p">P</option>
+								<option value="x">X</option>
+							    </select>
+							</div>
+						    </div>
+						</div>
+					    </td>
+					</tr>
+					<tr>
+					    <td>
+						<div class="row">
+						    <div class="form-group">
+							<label for="confluencePage" class="col-md-4 control-label">Confluence
+							    pagina:
+							</label>
+							<div class="col-md-8">
+							    <input data-ng-model="server.confluencePageUrl"
+								type="text" class="form-control" id="confluencePage"
+								placeholder="Confluence pagina" />
+							</div>
+						    </div>
+						</div>
+					    </td>
+					</tr>
+					<tr>
+					    <td>
+						<div class="row">
+						    <div class="form-group">
+							<label for="totalRam" class="col-md-4 control-label">RAM:</label>
+							<div class="col-md-8">
+							    <input name="serverRam" data-ng-model="server.totalRam"
+								type="number" class="form-control" id="RAM"
+								placeholder="Total Ram" />
+							</div>
+						    </div>
+						</div>
+						<div data-ng-show="serverForm.serverRam.$invalid">
+						    <br />
+						    <div class="row">
+							<div class="col-md-12">
+							    <div class="alert alert-warning centered">RAM moet
+								een getal zijn.
+							    </div>
+							</div>
+						    </div>
+						</div>
+					    </td>
+					</tr>
+					<tr>
+					    <td>
+						<div class="row">
+						    <div class="form-group">
+							<label for="diskSize" class="col-md-4 control-label">Disk:</label>
+							<div class="col-md-8">
+							    <input name="serverDiskSize"
+								data-ng-model="server.totalDiskSize" type="number"
+								class="form-control" id="diskSize"
+								placeholder="Totale disk grote." />
+							</div>
+						    </div>
+						</div>
+						<div data-ng-show="serverForm.serverDiskSize.$invalid">
+						    <br />
+						    <div class="row">
+							<div class="col-md-12">
+							    <div class="alert alert-warning centered">Disk moet
+								een getal zijn.
+							    </div>
+							</div>
+						    </div>
+						</div>
+					    </td>
+					</tr>
+					<tr>
+					    <td>
+						<div class="row">
+						    <div class="form-group">
+							<label for="cores" class="col-md-4 control-label">Cores:</label>
+							<div class="col-md-8">
+							    <input name="serverCores" data-ng-model="server.cores"
+								type="number" class="form-control" id="cores"
+								placeholder="Aantal cores" />
+							</div>
+						    </div>
+						</div>
+						<div data-ng-show="serverForm.serverCores.$invalid">
+						    <br />
+						    <div class="row">
+							<div class="col-md-12">
+							    <div class="alert alert-warning centered">Cores
+								moet een getal zijn.
+							    </div>
+							</div>
+						    </div>
+						</div>
+					    </td>
+					</tr>
+					<tr>
+					    <td>
+						<div class="row">
+						    <div class="form-group">
+							<label for="servercheck" class="col-md-8 control-label">Monitored
+							    bij servercheck:</label>
+							<div class="col-md-4">
+							    <switch-checkbox class="pull-right"
+									     data-on-model="server.monitoredByServercheck"
+									     data-switch-id="monitoredByServercheck"></switch-checkbox>
+							</div>
+						    </div>
+						</div>
+					    </td>
+					</tr>
+					<tr>
+					    <td>
+						<div class="row">
+						    <div class="form-group">
+							<label for="newrelic" class="col-md-8 control-label">Monitored
+							    bij New Relic:
+							</label>
+							<div class="col-md-4">
+							    <switch-checkbox class="pull-right"
+								data-on-model="server.monitoredByNewrelic"
+								data-switch-id="monitoredByNewrelic">
+							    </switch-checkbox>
+							</div>
+						    </div>
+						</div>
+					    </td>
+					</tr>
+					<tr>
+					    <td>
+						<div class="row">
+						    <div class="form-group">
+							<label for="hybernation" class="col-md-8 control-label">In
+							    hybernation:
+							</label>
+							<div class="col-md-4">
+							    <switch-checkbox class="pull-right" 
+								data-on-model="server.inHybernation"
+								data-switch-id="inHybernation">
+							    </switch-checkbox>
+							</div>
+						    </div>
+						</div>
+					    </td>
+					</tr>
+					<tr>
+					    <td>
+						<div class="row">
+						    <div class="form-group">
+							<label for="customer" class="col-md-4 control-label">SLA:</label>
+							<div class="col-md-8">
+							    <select id="sla" data-ng-model="server.sla"
+								    class="form-control"
+								    data-ng-options="sla.number for sla in slas">
+								<option value="">-- SLA's --</option>
+							    </select>
+							</div>
+						    </div>
+						</div>
+					    </td>
+					</tr>
+					<tr>
+					    <td>
+						<div class="row">
+						    <div class="form-group">
+							<label for="supplier" class="col-md-4 control-label">Leverancier:</label>
+							<div class="col-md-8">
+							    <select id="supplier" data-ng-model="server.supplier"
+								    class="form-control"
+								    data-ng-options="supplier.name for supplier in suppliers">
+								<option value="">-- Leveranciers --</option>
+							    </select>
+							</div>
+						    </div>
+						</div>
+					    </td>
+					</tr>
+					<tr>
+					    <td>
+						<div class="row">
+						    <div class="form-group">
+							<label for="purpose" class="col-md-4 control-label">Doel:</label>
+							<div class="col-md-8">
+							    <input data-ng-model="server.purpose" type="text"
+								class="form-control" id="purpose" placeholder="Doel">
+							</div>
+						    </div>
+						</div>
+					    </td>
+					</tr>
+					<tr>
+					    <td>
+						<div class="row">
+						    <div class="form-group">
+							<label for="remarks" class="col-md-4 control-label">Opmerking:</label>
+							<div class="col-md-8">
+							    <textarea data-ng-model="server.remarks" type="text"
+								class="form-control" id="remarks"
+								placeholder="Opmerking">
+							    </textarea>
+							</div>
+						    </div>
+						</div>
+					    </td>
+					</tr>
+					<tr>
+					    <td>
+						<div class="row">
+						    <div class="col-md-1">
+							<button type="submit" class="btn btn-success"
+								data-ng-click="updateServer(serverForm.$valid)">
+							    <i class="fa fa-floppy-o"></i> Opslaan
+							</button>
+						    </div>
+						</div>
+					    </td>
+					</tr>
+				    </tbody>
+				</table>
+			    </form>
+			</div>
+			<div class="col-md-8">
+			    <tabset justified="true">
+				<tab heading="Versies">
+				    <div class="panel panel-default">
+					<div class="panel-heading">
+					    <div class="row">
+						<div class="col-md-12">
+						    <switch-checkbox class="pull-left"
+							data-on-model="showVersionHistory"
+							data-switch-id="showVersionHistory"
+							data-switch-caption="Toon versie geschiedenis:"
+							data-on-clicked="toggleSwitchCheckbox('showVersionHistory')">
+							    
+						    </switch-checkbox>
+						</div>
+					    </div>
+					</div>
+					<table class="table table-striped table-bordered table-condensed table-selectable">
+					    <thead>
+						<tr>
+						    <th>Naam</th>
+						    <th>Versienummer</th>
+						    <th>Installatie datum</th>
+						</tr>
+					    </thead>
+					    <tbody>
+						<tr ng-repeat="row in serverVersions| orderBy:'timeOfMeasurement':true">
+						    <td class="col-md-3">{{ row.version.name}}</td>
+						    <td class="col-md-6">{{ row.version.versionNumber}}</td>
+						    <td class="col-md-3">{{ row.timeOfMeasurement | date:'HH:mm dd-MM-yyyy' }}</td>
+						</tr>
+						<tr data-ng-hide="serverVersions.length">
+						    <td colspan="3">
+							<div class="alert alert-info centered">Geen versies gevonden</div>
+						    </td>
+						</tr>
+					    </tbody>
+					</table>
+					<div class="panel-footer"></div>
+				    </div>
+				</tab> 
+				<tab heading="Gebruikers">
+				    <div class="panel panel-default">
+					<div class="panel-heading">
+					    <div class="row">
+						<div class="col-md-12">
+						    <switch-checkbox class="pull-left" on-model="showUserHistory"
+							data-switch-id="showUserHistory"
+							switch-caption="Toon gebruiker geschiedenis:"
+							data-on-clicked="toggleSwitchCheckbox('showUserHistory')">
+						    </switch-checkbox>
+						    <switch-checkbox class="pull-left" on-model="showKnownUsers"
+							data-switch-id="showKnownUsers"
+							switch-caption="Toon standaard/bekende gebruikers:"
+							data-on-clicked="toggleSwitchCheckbox('showKnownUsers')">
+							    
+						    </switch-checkbox>
+						</div>
+					    </div>
+					</div>
+					<table class="table table-striped table-bordered table-condensed table-selectable">
+					    <thead>
+						<tr>
+						    <th>Naam</th>
+						    <th data-ng-if="!showUserHistory">Sudo</th>
+						    <th data-ng-if="showUserHistory">Bijgekomen of weggegaan</th>
+						    <th data-ng-if="showUserHistory">Tijd</th>
+						</tr>
+					    </thead>
+					    <tbody>
+						<tr data-ng-if="showUserHistory" data-ng-repeat="row in serverUsers">
+						    <td class="col-md-2">{{ row.user.name}}</td>
+						    <td class="col-md-2"><replace-values
+							possible-values="['true', 'false']"
+							return-values="['Bijgekomen', 'Weggegaan']"
+							value="{{ row.joinOrLeft}}">
+						    </td>
+						    <td class="col-md-2">{{ row.timeOfMeasurement | date:'HH:mm dd-MM-yyyy' }}</td>
+						</tr>
+						<tr data-ng-if="!showUserHistory" data-ng-repeat="row in serverUsers| orderBy:'sudo':true">
+						    <td class="col-md-2">{{ row.user.name}}</td>
+						    <td class="col-md-2">
+							<replace-values
+							    possible-values="['true', 'false']"
+							    return-values="['<i class=\'fa fa-check\'></i>', '<i class=\'fa fa-times\'></i>']"
+							    value="{{ row.sudo}}">
+						    </td>
+						</tr>
+						<tr data-ng-hide="serverUsers.length">
+						    <td colspan="2">
+							<div class="alert alert-info centered">Geen gebruikers gevonden</div>
+						    </td>
+						</tr>
+					    </tbody>
+					</table>
+					<div class="panel-footer"></div>
+				    </div>
+				</tab> 
+				<tab heading="Ip-tables">
+				    <div class="panel panel-default">
+					<div class="panel-heading">
+					    <div class="row">
+						<div class="col-md-12">
+						    <switch-checkbox class="pull-left"
+							data-on-model="showKnownIptables"
+							data-switch-id="showKnownIptables"
+							data-switch-caption="Toon standaard/bekende iptable rules:"
+							data-on-clicked="toggleSwitchCheckbox('showKnownIptables')"></switch-checkbox>
+						</div>
+					    </div>
+					</div>
+					<table class="table table-striped table-bordered table-condensed table-selectable">
+					    <thead>
+						<tr>
+						    <th>Iptable rule</th>
+						</tr>
+					    </thead>
+					    <tbody>
+						<tr ng-repeat="row in iptables">
+						    <td>{{ row.iptable.tableRule}}</td>
+						</tr>
+						<tr data-ng-hide="iptables.length">
+						    <td colspan="2">
+							<div class="alert alert-info centered">Geen IP-table rules gevonden</div>
+						    </td>
+						</tr>
+					    </tbody>
+					</table>
+					<div class="panel-footer"></div>
+				    </div>
+				</tab>
+			    </tabset>
+			    <div class="custom-padding-top">
+				<div class="panel panel-default">
+				    <div class="panel-heading">
+					<div class="row">
+					    <div class="col-md-6">
+						<div class="pull-left">
+						    <h3 class="panel-title">Notities</h3>
+						    <!-- <h3 class="panel-title">{{ orderNote }}</h3> -->
+						    <!-- <h3 class="panel-title">{{ reverseNote }}</h3> -->
+						</div>
+					    </div>
+					    <div class="col-md-6">
+						<div class="pull-right">
+						    <label></label>
+						    <div class="btn-group">
+							<button type="button" class="btn btn-default btn-xs" ng-click="resetNoteOrder()">
+							    <i class="fa fa-refresh"></i> Reset Order
+							</button>
+							<button type="button" class="btn btn-success btn-xs" ng-click="openModal(null)">
+							    <i class="fa fa-plus"></i> Nieuw
+							</button>
+						    </div>
+						</div>
+					    </div>
+					</div>
+				    </div>
+				    <table class="table table-striped table-bordered table-condensed table-selectable">
+					<thead>
+					    <tr>
+						<th sort-table-head by="orderNote" reverse="reverseNote" order="'reporter'">Melder</th>
+						<th sort-table-head by="orderNote" reverse="reverseNote" order="'incidentDate'">Datum</th>
+						<th>Notitie</th>
+						<th>Actie</th>
+					    </tr>
+					</thead>
+					<tbody>
+					    <tr ng-repeat="row in notes| orderBy:orderNote:reverseNote">
+						<td class="col-md-2">{{ row.reporter}}</td>
+						<td class="col-md-2">{{ row.incidentDate | date:'HH:mm dd-MM-yyyy' }}</td>
+						<td class="col-md-7">{{ row.noteText}}</td>
+						<td class="col-md-1"><label></label>
+						    <div class="btn-group pull-right">
+							<button type="button" class="btn btn-primary btn-sm"
+								ng-click="openModal(row)" data-tooltip="Aanpassen"
+								tooltip-append-to-body="true">
+							    <i class="fa fa-pencil-square-o"></i>
+							</button>
+							<button type="button" class="btn btn-danger btn-sm"
+								ng-click="deleteNote(row.id)" data-tooltip="Verwijderen"
+								tooltip-append-to-body="true">
+							    <i class="fa fa-trash-o"></i>
+							</button>
+						    </div>
+						</td>
+					    </tr>
+					    <tr data-ng-hide="notes.length">
+						<td colspan="4">
+						    <div class="alert alert-info centered">Geen notities
+							gevonden</div>
+						</td>
+					    </tr>
+					</tbody>
+				    </table>
+				</div>
+			    </div>
+			</div>
+		    </div>
+		    <div data-ng-show="currentView == 'metrics'">
+			<div data-ng-repeat="chart in charts">
+			    <div class="col-md-6">
+				<div class="panel panel-default">
+				    <div class="panel-body">
+					<div id="{{ chart.type}}" high-stock-chart=""
+					     name="{{ chart.name}}"></div>
+				    </div>
+				</div>
+			    </div>
+			</div>
+		    </div>
+		</div>
+	    </div>
+	</div>
+    </div>
+</div>

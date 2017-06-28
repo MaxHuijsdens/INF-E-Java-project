@@ -1,0 +1,46 @@
+[
+	{
+		"group":"cust-vps",
+		"groupDescription":"Customer VPS and Dedicated",
+		"id":"89.31.97.6",
+		"label":"vps36796",
+		"status":"OK",
+		"statusFlags":"",
+		"cpuUsage":0.390000,
+		"loadAverage":0.000000,
+		"roundTripTime":1.000000,
+		"diskIO":2,
+		"networkIn":2,
+		"networkOut":0
+	}
+	,
+	{
+		"group":"cust-vps",
+		"groupDescription":"Customer VPS and Dedicated",
+		"id":"37.230.103.9",
+		"label":"vps14006",
+		"status":"OK",
+		"statusFlags":"",
+		"cpuUsage":0.000000,
+		"loadAverage":0.000000,
+		"roundTripTime":0.900000,
+		"diskIO":100,
+		"networkIn":0,
+		"networkOut":0
+	}
+	,
+	{
+		"group":"cust-vps",
+		"groupDescription":"Customer VPS and Dedicated",
+		"id":"141.138.195.12",
+		"label":"vps38681",
+		"status":"OK",
+		"statusFlags":"",
+		"cpuUsage":0.390000,
+		"loadAverage":0.000000,
+		"roundTripTime":0.600000,
+		"diskIO":2,
+		"networkIn":14,
+		"networkOut":22
+	}
+]

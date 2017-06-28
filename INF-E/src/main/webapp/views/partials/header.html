@@ -1,0 +1,43 @@
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <div class="container-fluid">
+  
+    <div class="navbar-header">
+            <button type="button" class="navbar-toggle" ng-click="toggleDropdown($event)" >
+                <span class="sr-only">Toggle navigation</span>
+                <span class="pull-left">MENU</span> <i class="fa fa-bars"></i>
+            </button>
+
+            <div class="brand">
+		        <img src="images/brand.png">
+		        <a href="#/activitystream" data-ng-if="loginService.isAuthenticated()" class="navbar-brand">Koekoek VPS Checker</a>
+		        <a href="#/" data-ng-if="!loginService.isAuthenticated()" class="navbar-brand">Koekoek VPS Checker</a>
+	        </div>
+    </div>
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="collapse navbar-collapse" collapse="status.collapsed">
+	    <ul class="nav navbar-nav" data-ng-if="loginService.isAuthenticated()">
+	       <li data-match-route="/activity"><a href="#/activitystream"><i class="fa fa-rss"></i> Activiteiten</a></li>
+	       <li data-match-route="/servers"><a href="#/servers"><i class="fa fa-list"></i> Servers</a></li>
+	       <li data-match-route="/compare"><a href="#/compare"><i class="fa fa-exchange"></i> Vergelijk data</a></li>
+	       <li class="dropdown">
+	       <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-wrench"></i> Beheer<span class="caret"></span></a>
+	          <ul class="dropdown-menu" role="menu">
+	            <li><a href="#/customers">Klanten en SLA</a></li>
+	            <li><a href="#/suppliers">Leveranciers</a></li>
+	            <li><a href="#/manage">Gebruikers en iptables</a></li>
+	          </ul>
+	       </li>
+	    </ul>
+	    
+	    <ul class="nav navbar-nav navbar-right">
+	        <li data-ng-if="loginService.isAuthenticated()">
+	            <p class="navbar-text"><i class="fa fa-user"></i> {{ loginService.user.name }}</p>
+	        </li>
+	        <li data-ng-if="loginService.isAuthenticated()">
+	            <a href="#/" class="logout" data-ng-click="logout()"><i class="fa fa-sign-out"></i> Uitloggen</a>
+	        </li>
+	        <li data-ng-if="!loginService.isAuthenticated()"><span class="navbar-text">Inloggen</span></li>
+	     </ul>
+     </div>
+  </div>
+</nav>
